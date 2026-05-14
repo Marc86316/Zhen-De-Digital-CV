@@ -3,155 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>振德的個人數位履歷 | Zhen-De Chen CV</title>
+    <title>陳振德 Zhen-De Chen | 智慧製造 & AI 工程師</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <script src="https://unpkg.com/lucide@latest"></script>
-
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-        body { font-family: 'Noto Sans TC', sans-serif; }
-        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-slate-50 text-slate-900">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
 
+        // 圖標組件
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => { window.lucide.createIcons(); }, [name]);
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
         const App = () => {
             const [lang, setLang] = useState('zh');
-            
-            // 圖標組件 (修正原本 import 無法使用的問題)
-            const Icon = ({ name, size = 20, className = "" }) => {
-                useEffect(() => {
-                    if (window.lucide) {
-                        window.lucide.createIcons();
-                    }
-                }, [name, lang]);
-                return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
-            };
 
             const content = {
                 zh: {
                     hero: {
-                        title: '智慧製造 × AI 應用工程師',
-                        subtitle: '結合設備工程、自動化與 AI 分析能力，專注於智慧製造、AOI 與資料驅動流程優化。'
+                        title: "智慧製造 × AI 應用工程師",
+                        subtitle: "結合設備工程、自動化與 AI 分析能力，專注於智慧製造、AOI 與資料驅動流程優化。"
                     },
                     about: {
-                        title: '關於我',
+                        title: "關於我",
                         paragraphs: [
-                            '我習慣以系統化方式拆解問題，並透過流程設計與時間管理提升執行效率。',
-                            '在思達科技擔任設備工程師期間，我負責設備整合與異常分析，並參與自動化流程設計。目前專注於將機器學習應用於工業場景中。'
+                            "我習慣以系統化方式拆解問題，並透過流程設計與時間管理提升執行效率。無論是在工程實務或學習過程中，我都傾向建立低阻力、可持續優化的工作流程。",
+                            "在思達科技 (STAr Technologies) 擔任設備工程師期間，我負責設備整合、異常分析與跨部門協調。目前專注於將深度學習與統計模型應用於工業生產，達成預測性維護與品質提升。"
                         ]
-                    },
-                    contact: {
-                        email: 'marcuslyleth@gmail.com',
-                        phone: '0975-099-958',
-                        location: '新竹 / 台中'
                     }
                 },
                 en: {
                     hero: {
-                        title: 'Smart Manufacturing × AI Engineer',
-                        subtitle: 'Integrating equipment engineering, automation, and AI analytics to optimize manufacturing processes.'
+                        title: "Smart Manufacturing × AI Engineer",
+                        subtitle: "Bridging equipment engineering and data science to optimize industrial processes through AI-driven insights."
                     },
                     about: {
-                        title: 'About Me',
+                        title: "About Me",
                         paragraphs: [
-                            'I excel at decomposing complex problems and improving execution efficiency through workflow design.',
-                            'Previously an Equipment Engineer at STAr Technologies, now focusing on applying Machine Learning to industrial scenarios.'
+                            "I excel at systematic problem-solving and efficiency optimization. My background in mechanical engineering combined with AI applications allows me to tackle complex manufacturing challenges.",
+                            "With experience as an Equipment Engineer at STAr Technologies, I am now focused on implementing Deep Learning and Statistical models for industrial automation and predictive maintenance."
                         ]
-                    },
-                    contact: {
-                        email: 'marcuslyleth@gmail.com',
-                        phone: '0975-099-958',
-                        location: 'Hsinchu / Taichung'
                     }
                 }
             };
 
+            const experiences = [
+                {
+                    year: "2020 - 2022",
+                    org: "思達科技 (STAr Technologies)",
+                    title: "設備工程師 (Equipment Engineer)",
+                    desc: "負責半導體測試設備整合、異常分析與自動化流程設計。",
+                    icon: "briefcase"
+                },
+                {
+                    year: "2022 - 2023",
+                    org: "University of Essex (UK)",
+                    title: "AI 應用碩士 (MSc in AI)",
+                    desc: "深入研究機器學習、深度學習與強化學習演算法。",
+                    icon: "graduation-cap"
+                },
+                {
+                    year: "2025 - 2026",
+                    org: "NYCU 陽明交大",
+                    title: "數據分析與 AI 卓越計畫",
+                    desc: "278小時密集的數據科學實作訓練。",
+                    icon: "award"
+                }
+            ];
+
+            const projects = [
+                {
+                    title: "AOI 瑕疵辨識模型開發",
+                    tech: ["CNN", "TensorFlow", "DenseNet"],
+                    desc: "利用 Aidea 開放資料集，訓練 DenseNet 模型辨識產品表面瑕疵，測試準確度達 99.5%。",
+                    link: "https://github.com/Marc86316/Aidea-AOI-defects-detection"
+                },
+                {
+                    title: "渦輪引擎剩餘壽命預測 (RUL)",
+                    tech: ["LSTM", "Bi-LSTM", "PyTorch"],
+                    desc: "基於 NASA CMAPSS 資料集，使用長短期記憶神經網路預測設備故障時間，有效優化維護排程。",
+                    link: "https://github.com/Marc86316/Remaining-Useful-Life-Prediction-for-Turbofan-Engines"
+                },
+                {
+                    title: "電力分配策略優化模型",
+                    tech: ["R", "Linear Programming", "SARIMA"],
+                    desc: "建立滾動式能源分配模型，平衡成本與碳排放政策，提供最佳化決策建議。"
+                }
+            ];
+
+            const skills = [
+                { cat: "精密工程", items: ["設備整合", "PLC 控制", "自動化治具設計", "SOP 制定"] },
+                { cat: "數據科學 & AI", items: ["Python / R", "機器學習 (XGBoost, RF)", "深度學習 (CNN, LSTM)", "Power BI"] },
+                { cat: "控制系統", items: ["STM32", "Arduino", "馬達控制 (PWM)", "IoT 應用"] }
+            ];
+
             return (
                 <div className="min-h-screen">
-                    {/* 導覽列 */}
-                    <nav className="fixed top-0 w-full z-50 glass-effect border-b border-gray-200">
-                        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-                            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                                ZHEN-DE CHEN
-                            </span>
+                    {/* Navigation */}
+                    <nav className="fixed top-0 w-full z-50 glass-nav border-b border-slate-200 px-6 py-4">
+                        <div className="max-w-6xl mx-auto flex justify-between items-center">
+                            <h1 className="text-xl font-bold tracking-tight text-blue-600">ZHEN-DE CHEN</h1>
                             <div className="flex gap-4">
-                                <button onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} 
-                                        className="flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors text-sm">
-                                    <Icon name="globe" size={16} />
+                                <button onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} className="text-sm font-medium border px-3 py-1 rounded-full hover:bg-slate-100 transition-colors">
                                     {lang === 'zh' ? 'English' : '中文'}
                                 </button>
                             </div>
                         </div>
                     </nav>
 
-                    {/* Hero 區塊 */}
-                    <header className="pt-32 pb-20 px-6 bg-gradient-to-b from-blue-50 to-white">
+                    {/* Hero */}
+                    <section className="pt-32 pb-20 px-6 bg-gradient-to-b from-blue-50 to-white">
                         <div className="max-w-4xl mx-auto text-center">
-                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                                {content[lang].hero.title}
-                            </h1>
-                            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                                {content[lang].hero.subtitle}
-                            </p>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                <a href="mailto:marcuslyleth@gmail.com" className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-md">
-                                    <Icon name="mail" /> {lang === 'zh' ? '聯繫我' : 'Contact Me'}
+                            <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6">{content[lang].hero.title}</h2>
+                            <p className="text-xl text-slate-600 mb-10 leading-relaxed">{content[lang].hero.subtitle}</p>
+                            <div className="flex justify-center gap-4">
+                                <a href="mailto:marcuslyleth@gmail.com" className="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2">
+                                    <Icon name="mail" /> 聯繫我
                                 </a>
-                                <a href="https://github.com/Marc86316" target="_blank" className="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-black transition-all shadow-md">
+                                <a href="https://github.com/Marc86316" className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-black transition-all flex items-center gap-2">
                                     <Icon name="github" /> GitHub
                                 </a>
                             </div>
                         </div>
-                    </header>
+                    </section>
 
-                    {/* 關於我 */}
-                    <section className="py-20 px-6">
-                        <div className="max-w-4xl mx-auto">
-                            <div className="flex items-center gap-3 mb-8">
-                                <Icon name="user" className="text-blue-600" size={28} />
-                                <h2 className="text-2xl font-bold">{content[lang].about.title}</h2>
+                    {/* About & Experience */}
+                    <section className="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2"><Icon name="user" className="text-blue-600" /> {content[lang].about.title}</h3>
+                            <div className="space-y-4">
+                                {content[lang].about.paragraphs.map((p, i) => <p key={i} className="text-slate-600 leading-relaxed text-lg">{p}</p>)}
                             </div>
-                            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-                                {content[lang].about.paragraphs.map((p, i) => (
-                                    <p key={i} className="text-gray-600 mb-4 leading-relaxed text-lg">{p}</p>
+                            
+                            <h3 className="text-2xl font-bold mt-12 mb-6 flex items-center gap-2"><Icon name="cpu" className="text-blue-600" /> 技術棧</h3>
+                            <div className="grid grid-cols-1 gap-4">
+                                {skills.map((s, i) => (
+                                    <div key={i} className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                        <h4 className="font-bold text-blue-600 mb-2">{s.cat}</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {s.items.map((item, idx) => <span key={idx} className="bg-slate-100 px-2 py-1 rounded text-sm text-slate-700">{item}</span>)}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2"><Icon name="history" className="text-blue-600" /> 經歷回顧</h3>
+                            <div className="space-y-6">
+                                {experiences.map((exp, i) => (
+                                    <div key={i} className="relative pl-8 border-l-2 border-slate-200 pb-2">
+                                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-600 shadow-[0_0_0_4px_rgba(37,99,235,0.1)]"></div>
+                                        <span className="text-sm font-bold text-blue-600 uppercase tracking-wider">{exp.year}</span>
+                                        <h4 className="text-xl font-bold text-slate-900 mt-1">{exp.org}</h4>
+                                        <p className="font-medium text-slate-700">{exp.title}</p>
+                                        <p className="text-slate-500 mt-2 text-sm leading-relaxed">{exp.desc}</p>
+                                    </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    {/* 聯絡資訊 */}
-                    <footer className="py-20 px-6 bg-gray-900 text-white">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-2xl font-bold mb-10 underline decoration-blue-500 underline-offset-8">Let's Connect</h2>
+                    {/* Projects */}
+                    <section className="py-20 px-6 bg-slate-900 text-white">
+                        <div className="max-w-6xl mx-auto">
+                            <h3 className="text-3xl font-bold mb-12 text-center">核心專案成果</h3>
                             <div className="grid md:grid-cols-3 gap-8">
-                                <div className="flex flex-col items-center gap-2">
-                                    <Icon name="mail" className="text-blue-400" />
-                                    <span>{content[lang].contact.email}</span>
-                                </div>
-                                <div className="flex flex-col items-center gap-2">
-                                    <Icon name="phone" className="text-blue-400" />
-                                    <span>{content[lang].contact.phone}</span>
-                                </div>
-                                <div className="flex flex-col items-center gap-2">
-                                    <Icon name="map-pin" className="text-blue-400" />
-                                    <span>{content[lang].contact.location}</span>
-                                </div>
-                            </div>
-                            <div className="mt-16 text-gray-500 text-sm">
-                                © 2026 Zhen-De Chen. All rights reserved.
+                                {projects.map((proj, i) => (
+                                    <div key={i} className="bg-slate-800 p-8 rounded-3xl border border-slate-700 card-hover flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex gap-2 mb-4">
+                                                {proj.tech.map((t, idx) => <span key={idx} className="text-[10px] font-bold px-2 py-1 bg-blue-500/20 text-blue-400 rounded-lg uppercase">{t}</span>)}
+                                            </div>
+                                            <h4 className="text-xl font-bold mb-4">{proj.title}</h4>
+                                            <p className="text-slate-400 text-sm leading-relaxed mb-6">{proj.desc}</p>
+                                        </div>
+                                        {proj.link && (
+                                            <a href={proj.link} target="_blank" className="text-blue-400 flex items-center gap-2 hover:underline">
+                                                查看 GitHub <Icon name="external-link" size={14} />
+                                            </a>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="py-12 text-center text-slate-400 border-t border-slate-100">
+                        <div className="flex justify-center gap-8 mb-6">
+                            <span className="flex items-center gap-1"><Icon name="phone" size={16} /> 0975-099-958</span>
+                            <span className="flex items-center gap-1"><Icon name="map-pin" size={16} /> 新竹 / 台中</span>
+                        </div>
+                        <p>© 2026 Zhen-De Chen. Built with React & Tailwind CSS.</p>
                     </footer>
                 </div>
             );
