@@ -28,14 +28,22 @@
 
         // 圖標組件
         const Icon = ({ name, size = 20, className = "" }) => {
-            useEffect(() => { window.lucide.createIcons(); }, [name]);
-            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+            return (
+                <i
+                    data-lucide={name}
+                    style={{ width: size, height: size }}
+                    className={className}
+                ></i>
+            );
         };
 
         const App = () => {
 
             const [lang, setLang] = useState('zh');
             const [selectedExperience, setSelectedExperience] = useState(null);
+            useEffect(() => {
+                window.lucide.createIcons();
+            });
 
             const scrollToSection = (id) => {
             const element = document.getElementById(id);
@@ -127,7 +135,7 @@
             ]
             },
 
-            icon: <Award className="w-5 h-5" />
+            icon: 'award'
             },
             {
             year: '2024/09 - 2025/10',
@@ -159,7 +167,7 @@
             ]
             },
 
-            icon: <Briefcase className="w-5 h-5" />
+            icon: 'briefcase'
             },
             {
             year: '2024/04 - 2024/05',
@@ -191,7 +199,7 @@
                 ]
             },
 
-            icon: <Trophy className="w-5 h-5" />
+            icon: 'trophy'
             },
 
             {
@@ -224,7 +232,7 @@
                 ]
             },
 
-            icon: <Award className="w-5 h-5" />
+            icon: 'award'
             },
             {
                 year: '2022/10 - 2023/12',
@@ -256,7 +264,7 @@
                 ]
                 },
 
-                icon: <BookOpen className="w-5 h-5" />
+                icon: 'book-open'
             },
             {
                 year: '2020/07 - 2022/07',
@@ -290,7 +298,7 @@
                 ]
                 },
 
-                icon: <Briefcase className="w-5 h-5" />
+                icon: 'briefcase'
             },
             {
             year: '2015/09 - 2019/06',
@@ -322,9 +330,9 @@
                 ]
             },
 
-            icon: <Cpu className="w-5 h-5" />
+            icon: 'cpu'
             },
-            ];
+        ];
 
         const projects = [
         {
@@ -512,7 +520,7 @@
 
                     </div>
 
-                    <Globe className="text-slate-400" size={18} />
+                    <Icon name="globe" className="text-slate-400" size={18} />
 
                 </div>
 
@@ -534,19 +542,19 @@
                     href="mailto:marcuslyleth@gmail.com"
                     className="flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all"
                     >
-                    <Mail size={16} />
+                    <Icon name="mail" size={16} />
                     Contact
                     </a>
 
                     <div className="flex items-center gap-5 px-5 py-3 border rounded-full text-slate-600 bg-white">
 
                     <div className="flex items-center gap-1">
-                        <Phone size={14} />
+                        <Icon name="phone" size={14} />
                         0975-099-958
                     </div>
 
                     <div className="flex items-center gap-1">
-                        <Github size={14} />
+                        <Icon name="github" size={14} />
                         Marc86316
                     </div>
 
@@ -557,7 +565,7 @@
                 <div className="w-56 h-56 md:w-72 md:h-72 bg-slate-200 rounded-3xl overflow-hidden relative shadow-xl">
 
                 <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center">
-                    <User size={100} className="text-blue-600" />
+                    <Icon name="user" size={100} className="text-blue-600" />
                 </div>
 
                 </div>
@@ -571,7 +579,7 @@
             <div className="max-w-5xl mx-auto">
 
                 <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
-                <BookOpen className="text-blue-600" />
+                <Icon name="book-open" className="text-blue-600" />
                 Experience Timeline
                 </h2>
 
@@ -602,7 +610,7 @@
 
                         <div className="flex items-center gap-2 text-slate-500 font-medium mb-4">
 
-                        {item.icon}
+                        <Icon name={item.icon} className="w-5 h-5" />
 
                         <span>
                             {item.org}
@@ -630,7 +638,7 @@
             <div className="max-w-6xl mx-auto">
 
                 <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
-                <Terminal className="text-blue-600" />
+                <Icon name="terminal" className="text-blue-600" />
                 Core Projects
                 </h2>
 
@@ -690,7 +698,8 @@
                             className="flex gap-2 text-sm text-slate-600"
                         >
 
-                            <ChevronRight
+                            <Icon
+                            name="chevron-right"
                             className="w-4 h-4 mt-0.5 text-blue-500"
                             />
 
@@ -709,11 +718,11 @@
                         className="flex items-center gap-2 text-blue-600 font-bold hover:underline"
                     >
 
-                        <Github size={16} />
+                        <Icon name="github" size={16} />
 
                         View GitHub
 
-                        <ExternalLink size={14} />
+                        <Icon name="external-link" size={14} />
 
                     </a>
 
@@ -733,7 +742,7 @@
 
                 <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
 
-                <Wrench className="text-blue-400" />
+                <Icon name="wrench" className="text-blue-400" />
 
                 Technical Stack
 
@@ -758,7 +767,8 @@
                             className="flex items-center gap-2 text-slate-300 text-sm"
                         >
 
-                            <ChevronRight
+                            <Icon
+                            name="chevron-right"
                             size={14}
                             className="text-blue-500"
                             />
@@ -787,7 +797,7 @@
 
                 <div className="flex items-center gap-3 mb-12">
 
-                <FileText className="text-blue-600 w-8 h-8" />
+                <Icon name="file-text" className="text-blue-600 w-8 h-8" />
 
                 <h2 className="text-3xl font-bold">
                     {content[lang].about.title}
@@ -838,7 +848,7 @@
                     className="absolute top-5 right-5 z-50 bg-white rounded-full p-2 shadow hover:bg-slate-100"
                 >
 
-                    <X size={20} />
+                    <Icon name="x" size={20} />
 
                 </button>
 
@@ -868,7 +878,7 @@
 
                         <img
                         key={idx}
-                        src={profile.jpg}
+                        src={img}
                         alt="experience"
                         className="rounded-2xl w-full h-72 object-cover"
                         />
