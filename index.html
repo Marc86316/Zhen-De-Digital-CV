@@ -1,0 +1,901 @@
+import React, { useState } from 'react';
+import {
+  User,
+  BookOpen,
+  Briefcase,
+  Wrench,
+  Mail,
+  Phone,
+  Github,
+  ChevronRight,
+  ExternalLink,
+  Award,
+  Cpu,
+  Terminal,
+  Trophy,
+  FileText,
+  X,
+  Globe
+} from 'lucide-react';
+
+const App = () => {
+
+  const [lang, setLang] = useState('zh');
+  const [selectedExperience, setSelectedExperience] = useState(null);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const content = {
+    zh: {
+      hero: {
+        title: '智慧製造 × AI 應用工程師',
+        subtitle:
+          '結合設備工程、自動化與 AI 分析能力，專注於智慧製造、AOI 與資料驅動流程優化。'
+      },
+
+      about: {
+        title: '關於我',
+
+        paragraphs: [
+          '我習慣以系統化方式拆解問題，並透過流程設計與時間管理提升執行效率。無論是在工程實務或學習過程中，我都傾向建立低阻力、可持續優化的工作流程，並重視系統穩定性與問題定位能力。',
+
+          '在思達科技擔任設備工程師期間，我負責設備整合、異常分析與跨部門協調，經常需要在研發、生產端與國外設備供應商之間進行技術溝通與問題定位。除了追蹤設備異常與製程問題外，我也參與自動化治具與座標 mapping 流程設計，以降低人工操作誤差並提升設備穩定性。',
+
+          '在設備整合與異常分析的過程中，我逐漸意識到，傳統 rule-based 控制邏輯在面對動態製程與現場變因時容易受到限制。許多問題並非單純來自設備本身，而是與資料判讀、流程設計以及跨部門資訊落差有關。',
+
+          '因此我開始希望透過資料分析與機器學習，提升系統對異常狀態的判讀能力與製程適應性。這也成為我前往英國攻讀人工智慧碩士的重要契機。',
+
+          '目前我正積極結合機械背景、設備經驗與影像分析技術，特別關注 AOI 與智慧製造相關應用。我希望未來能持續投入 AI 與工程系統整合領域，建立更穩定且具持續優化能力的智慧製造流程。'
+        ]
+      }
+    },
+
+    en: {
+      hero: {
+        title: 'Smart Manufacturing × AI Engineer',
+        subtitle:
+          'Combining automation engineering with AI-driven analytics for smart manufacturing and data-driven optimization.'
+      },
+
+      about: {
+        title: 'About Me',
+
+        paragraphs: [
+          'I approach problems through systematic decomposition and process optimization to improve execution efficiency and workflow stability.',
+
+          'During equipment integration and troubleshooting, I realized that traditional rule-based systems often lack adaptability in dynamic manufacturing environments.',
+
+          'This motivated me to pursue AI and data analytics to improve anomaly detection, process adaptability, and intelligent decision-making capabilities.',
+
+          'Currently, I am integrating mechanical engineering, automation, and computer vision technologies for smart manufacturing applications, especially AOI and predictive maintenance systems.'
+        ]
+      }
+    }
+  };
+
+  const timelineData = [
+     {
+      year: '2025/12 - 2026/03',
+      title: 'AI 數據分析菁英計畫',
+      org: '國立陽明交通大學',
+
+      shortDesc:
+        '補強智慧製造與資料分析實務能力。',
+
+      detail: {
+        images: [
+          'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop'
+        ],
+
+        content:
+          `完成 278 小時密集訓練。
+          內容包含：
+          • 統計分析
+          • Machine Learning
+          • Time-series Forecasting
+          • 商業分析
+          • 資料視覺化
+          • Feature Engineering`,
+
+        tech: [
+          'Python',
+          'SQL',
+          'Power BI',
+          'Statistics'
+        ]
+      },
+
+      icon: <Award className="w-5 h-5" />
+    },
+    {
+    year: '2024/09 - 2025/10',
+    title: '數據分析講師',
+    org: 'Freelance / 遠端教學',
+
+    shortDesc:
+      '協助不同背景學員理解資料分析與 AI 概念。',
+
+    detail: {
+      images: [
+        'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop'
+      ],
+
+      content:
+        `提供資料分析、Python 與 AI 概念教學與技術諮詢。
+        協助學員建立完整分析流程，包含：
+        • Data Cleaning
+        • Exploratory Data Analysis
+        • Data Visualization
+        • AI Workflow Design`,
+
+      tech: [
+        'Python',
+        'Pandas',
+        'SQL',
+        'Data Visualization'
+      ]
+    },
+
+    icon: <Briefcase className="w-5 h-5" />
+    },
+    {
+    year: '2024/04 - 2024/05',
+    title: 'AWS Cloud Hackathon',
+    org: 'AWS / University of Essex',
+
+    shortDesc:
+      '實作 AWS 雲端架構與可擴展型系統設計。',
+
+    detail: {
+      images: [
+        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop'
+      ],
+
+      content:
+        `參與 AWS 雲端黑客松競賽，專注於雲端服務整合與系統架構設計。
+        專案內容包含：
+        • Cloud Architecture
+        • Scalable System Design
+        • Team Collaboration
+        • AWS Service Integration`,
+
+      tech: [
+        'AWS',
+        'Cloud Computing',
+        'System Design',
+        'DevOps'
+      ]
+    },
+
+    icon: <Trophy className="w-5 h-5" />
+    },
+
+    {
+    year: '2024/03',
+    title: 'DataCamp Data Analyst Associate',
+    org: 'DataCamp',
+
+    shortDesc:
+      '完成 SQL、Python 與資料分析相關認證。',
+
+    detail: {
+      images: [
+        'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop'
+      ],
+
+      content:
+        `完成 Data Analyst Associate 認證，強化資料分析與商業分析能力。
+        學習內容包含：
+        • SQL Querying
+        • Python Data Analysis
+        • Data Visualization
+        • Statistical Analysis`,
+
+      tech: [
+        'SQL',
+        'Python',
+        'Pandas',
+        'Tableau'
+      ]
+    },
+
+    icon: <Award className="w-5 h-5" />
+    },
+    {
+      year: '2022/10 - 2023/12',
+      title: '人工智慧碩士 MSc AI and its Application',
+      org: 'University of Essex, UK',
+
+      shortDesc:
+        '建立機器學習與深度學習理論基礎。',
+
+      detail: {
+        images: [
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+        ],
+
+        content:
+          `系統性學習 Machine Learning、Deep Learning 與 Reinforcement Learning。
+          研究方向包含：
+          • Predictive Maintenance
+          • Time-series Analysis
+          • Feature Engineering
+          • Model Evaluation`,
+
+        tech: [
+          'Python',
+          'TensorFlow',
+          'PyTorch',
+          'Machine Learning'
+        ]
+      },
+
+      icon: <BookOpen className="w-5 h-5" />
+    },
+    {
+      year: '2020/07 - 2022/07',
+      title: '設備整合工程師',
+      org: 'STAr Technologies',
+
+      shortDesc:
+        '負責設備整合、異常分析與跨部門協作。',
+
+      detail: {
+        images: [
+          'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1200&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop'
+        ],
+
+        content:
+          `負責設備整合、異常分析與 SOP 建立。
+          主要工作包含：
+          • 設備 mapping 與 alignment 流程改善
+          • 與國外設備商進行技術溝通
+          • 問題 root cause analysis
+          • 製程穩定性優化
+          • 自動化流程導入`,
+
+        tech: [
+          'Automation',
+          'Equipment Integration',
+          'Troubleshooting',
+          'Precision Alignment'
+        ]
+      },
+
+      icon: <Briefcase className="w-5 h-5" />
+    },
+    {
+    year: '2015/09 - 2019/06',
+    title: '機械工程學士',
+    org: '大同大學',
+
+    shortDesc:
+      '建立機電整合、自動控制與嵌入式系統基礎。',
+
+    detail: {
+      images: [
+        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop'
+      ],
+
+      content:
+        `學習機械工程、自動控制與嵌入式系統設計。
+        專題研究涵蓋：
+        • STM32 Microcontroller
+        • Stepper Motor Control
+        • Embedded Systems
+        • Mechatronics Integration`,
+
+      tech: [
+        'STM32',
+        'Embedded Systems',
+        'C/C++',
+        'Auto Control'
+      ]
+    },
+
+    icon: <Cpu className="w-5 h-5" />
+    },
+  ];
+
+  const projects = [
+    {
+      title: 'Aidea AOI 瑕疵影像檢測',
+
+      tags: [
+        'Computer Vision',
+        'Smart Manufacturing'
+      ],
+
+      tech: [
+        'TensorFlow',
+        'DenseNet',
+        'Xception',
+        'InceptionResNet'
+      ],
+
+      desc:
+        '建立 AOI multiclass defect classification workflow，針對 6 類表面瑕疵進行辨識，並比較不同 CNN architecture 在工業影像分類任務中的表現。',
+
+      highlights: [
+        '導入 multi-scale resizing 與 data augmentation 提升模型 robustness',
+        '處理製造現場光影變化與樣本差異問題',
+        '建立 preprocessing 與 model evaluation workflow'
+      ],
+
+      github:
+        'https://github.com/Eason0227/Aidea-AOI-defects-detection'
+    },
+
+    {
+      title: '渦輪引擎剩餘壽命預測 (RUL)',
+
+      tags: [
+        'Predictive Maintenance',
+        'Regression'
+      ],
+
+      tech: [
+        'Bi-LSTM',
+        'GRU',
+        'XGBoost',
+        'PCA'
+      ],
+
+      desc:
+        '基於 NASA C-MAPSS dataset 建立 predictive maintenance workflow，比較不同 feature engineering 與 sequence model 在設備壽命預測任務中的表現。',
+
+      highlights: [
+        '比較 PCA 與 Mutual Information feature selection',
+        '利用 Rolling Window 萃取 temporal features',
+        '比較 Bi-LSTM、GRU 與 XGBoost regression performance'
+      ],
+
+      github:
+        'https://github.com/Eason0227/Turbofan-Engine-Remaining-Useful-Life-Prediction'
+    }
+  ];
+
+  const skills = [
+    {
+      cat: 'Data & AI',
+
+      items: [
+        'Python',
+        'Machine Learning',
+        'Deep Learning',
+        'Computer Vision',
+        'SQL'
+      ]
+    },
+
+    {
+      cat: 'Automation',
+
+      items: [
+        'PLC',
+        'STM32',
+        'Motion Control',
+        'Automation Workflow'
+      ]
+    },
+
+    {
+      cat: 'Engineering',
+
+      items: [
+        'Equipment Integration',
+        'Root Cause Analysis',
+        'SOP Design',
+        'QC'
+      ]
+    },
+
+    {
+      cat: 'Tools',
+
+      items: [
+        'TensorFlow',
+        'Power BI',
+        'SolidWorks',
+        'AutoCAD'
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b z-50">
+
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            Zhen-De Chen
+          </span>
+
+          <div className="hidden md:flex gap-8 text-sm font-medium">
+
+            <button
+              onClick={() => scrollToSection('experience')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              Experience
+            </button>
+
+            <button
+              onClick={() => scrollToSection('projects')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              Projects
+            </button>
+
+            <button
+              onClick={() => scrollToSection('skills')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              Skills
+            </button>
+
+            <button
+              onClick={() => scrollToSection('about')}
+              className="hover:text-blue-600 transition-colors"
+            >
+              About
+            </button>
+
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <header className="pt-32 pb-24 px-6 bg-white">
+
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-14">
+
+          <div className="flex-1 space-y-8">
+
+            <div className="flex items-center gap-3">
+
+              <div className="flex gap-2">
+
+                <button
+                  onClick={() => setLang('zh')}
+                  className={`px-4 py-2 rounded-full text-sm transition-all ${
+                    lang === 'zh'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-slate-100'
+                  }`}
+                >
+                  中文
+                </button>
+
+                <button
+                  onClick={() => setLang('en')}
+                  className={`px-4 py-2 rounded-full text-sm transition-all ${
+                    lang === 'en'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-slate-100'
+                  }`}
+                >
+                  EN
+                </button>
+
+              </div>
+
+              <Globe className="text-slate-400" size={18} />
+
+            </div>
+
+            <div className="space-y-4">
+
+              <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                {content[lang].hero.title}
+              </h1>
+
+              <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                {content[lang].hero.subtitle}
+              </p>
+
+            </div>
+
+            <div className="flex flex-wrap gap-4 text-sm">
+
+              <a
+                href="mailto:marcuslyleth@gmail.com"
+                className="flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all"
+              >
+                <Mail size={16} />
+                Contact
+              </a>
+
+              <div className="flex items-center gap-5 px-5 py-3 border rounded-full text-slate-600 bg-white">
+
+                <div className="flex items-center gap-1">
+                  <Phone size={14} />
+                  0975-099-958
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <Github size={14} />
+                  Marc86316
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div className="w-56 h-56 md:w-72 md:h-72 bg-slate-200 rounded-3xl overflow-hidden relative shadow-xl">
+
+            <div className="absolute inset-0 bg-blue-600/10 flex items-center justify-center">
+              <User size={100} className="text-blue-600" />
+            </div>
+
+          </div>
+
+        </div>
+      </header>
+
+      {/* Experience */}
+      <section id="experience" className="py-24 px-6 bg-slate-50">
+
+        <div className="max-w-5xl mx-auto">
+
+          <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
+            <BookOpen className="text-blue-600" />
+            Experience Timeline
+          </h2>
+
+          <div className="relative border-l-2 border-slate-200 ml-4 space-y-10">
+
+            {timelineData.map((item, index) => (
+
+              <div key={index} className="relative pl-10 group">
+
+                <div className="absolute -left-[11px] top-1 w-5 h-5 bg-white border-2 border-blue-600 rounded-full"></div>
+
+                <div
+                  onClick={() => setSelectedExperience(item)}
+                  className="cursor-pointer bg-white p-6 rounded-2xl shadow-sm border hover:shadow-lg hover:-translate-y-1 transition-all"
+                >
+
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-3">
+
+                    <h3 className="font-bold text-lg">
+                      {item.title}
+                    </h3>
+
+                    <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                      {item.year}
+                    </span>
+
+                  </div>
+
+                  <div className="flex items-center gap-2 text-slate-500 font-medium mb-4">
+
+                    {item.icon}
+
+                    <span>
+                      {item.org}
+                    </span>
+
+                  </div>
+
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {item.shortDesc}
+                  </p>
+
+                </div>
+
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="py-24 px-6 bg-white">
+
+        <div className="max-w-6xl mx-auto">
+
+          <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
+            <Terminal className="text-blue-600" />
+            Core Projects
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+
+            {projects.map((proj, index) => (
+
+              <div
+                key={index}
+                className="bg-slate-50 border border-slate-200 rounded-3xl p-8 hover:shadow-xl transition-all"
+              >
+
+                <div className="flex flex-wrap gap-2 mb-5">
+
+                  {proj.tags.map((tag, idx) => (
+
+                    <span
+                      key={idx}
+                      className="px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-bold"
+                    >
+                      {tag}
+                    </span>
+
+                  ))}
+
+                </div>
+
+                <h3 className="text-2xl font-bold mb-5">
+                  {proj.title}
+                </h3>
+
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  {proj.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+
+                  {proj.tech.map((tech, idx) => (
+
+                    <span
+                      key={idx}
+                      className="text-xs px-3 py-1 bg-white border rounded-full"
+                    >
+                      {tech}
+                    </span>
+
+                  ))}
+
+                </div>
+
+                <ul className="space-y-3 mb-8">
+
+                  {proj.highlights.map((h, idx) => (
+
+                    <li
+                      key={idx}
+                      className="flex gap-2 text-sm text-slate-600"
+                    >
+
+                      <ChevronRight
+                        className="w-4 h-4 mt-0.5 text-blue-500"
+                      />
+
+                      {h}
+
+                    </li>
+
+                  ))}
+
+                </ul>
+
+                <a
+                  href={proj.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-blue-600 font-bold hover:underline"
+                >
+
+                  <Github size={16} />
+
+                  View GitHub
+
+                  <ExternalLink size={14} />
+
+                </a>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="py-24 px-6 bg-slate-900 text-white">
+
+        <div className="max-w-6xl mx-auto">
+
+          <h2 className="text-3xl font-bold mb-14 flex items-center gap-3">
+
+            <Wrench className="text-blue-400" />
+
+            Technical Stack
+
+          </h2>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            {skills.map((skill, index) => (
+
+              <div key={index}>
+
+                <h3 className="text-blue-400 font-bold border-b border-slate-700 pb-3 mb-5">
+                  {skill.cat}
+                </h3>
+
+                <ul className="space-y-3">
+
+                  {skill.items.map((item, idx) => (
+
+                    <li
+                      key={idx}
+                      className="flex items-center gap-2 text-slate-300 text-sm"
+                    >
+
+                      <ChevronRight
+                        size={14}
+                        className="text-blue-500"
+                      />
+
+                      {item}
+
+                    </li>
+
+                  ))}
+
+                </ul>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="py-24 px-6 bg-slate-100">
+
+        <div className="max-w-5xl mx-auto">
+
+          <div className="flex items-center gap-3 mb-12">
+
+            <FileText className="text-blue-600 w-8 h-8" />
+
+            <h2 className="text-3xl font-bold">
+              {content[lang].about.title}
+            </h2>
+
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-12 space-y-8">
+
+            {content[lang].about.paragraphs.map((p, idx) => (
+
+              <p
+                key={idx}
+                className="text-slate-600 leading-relaxed"
+              >
+                {p}
+              </p>
+
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 bg-white border-t border-slate-100 text-center">
+
+        <div className="max-w-5xl mx-auto">
+
+          <p className="text-slate-400 text-sm">
+            © 2026 Zhen-De Chen · AI for Manufacturing · Automation · Data-driven Engineering
+          </p>
+
+        </div>
+
+      </footer>
+
+      {/* Experience Modal */}
+      {selectedExperience && (
+
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-6">
+
+          <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative">
+
+            <button
+              onClick={() => setSelectedExperience(null)}
+              className="absolute top-5 right-5 z-50 bg-white rounded-full p-2 shadow hover:bg-slate-100"
+            >
+
+              <X size={20} />
+
+            </button>
+
+            <div className="p-8 space-y-8">
+
+              <div>
+
+                <h2 className="text-3xl font-bold mb-3">
+                  {selectedExperience.title}
+                </h2>
+
+                <p className="text-blue-600 font-medium">
+                  {selectedExperience.year}
+                </p>
+
+              </div>
+
+              <div
+                className={`grid gap-4 ${
+                  selectedExperience.detail.images.length === 1
+                    ? 'grid-cols-1'
+                    : 'grid-cols-2'
+                }`}
+              >
+
+                {selectedExperience.detail.images.map((img, idx) => (
+
+                  <img
+                    key={idx}
+                    src={img}
+                    alt="experience"
+                    className="rounded-2xl w-full h-72 object-cover"
+                  />
+
+                ))}
+
+              </div>
+
+              <div className="space-y-6">
+
+                <p className="text-slate-600 whitespace-pre-line leading-relaxed">
+                  {selectedExperience.detail.content}
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+
+                  {selectedExperience.detail.tech.map((t, idx) => (
+
+                    <span
+                      key={idx}
+                      className="px-4 py-2 bg-slate-100 rounded-full text-sm"
+                    >
+                      {t}
+                    </span>
+
+                  ))}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+    </div>
+  );
+};
+
+export default App;
